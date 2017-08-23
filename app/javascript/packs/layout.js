@@ -15,12 +15,11 @@ Vue.material.registerTheme('default', {
   primary: 'teal',
   accent: 'red',
   warn: 'red',
-  background: 'grey',
+  background: 'white',
   textColor: 'black'
 })
 
 document.addEventListener('DOMContentLoaded', () => {
   document.body.appendChild(document.createElement('toolbar'))
   const toolbar = new Vue(Toolbar).$mount('toolbar')
-  console.log(toolbar)
 })
