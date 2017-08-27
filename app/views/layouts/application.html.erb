@@ -10,6 +10,14 @@
   </head>
 
   <body>
+
+    <%= content_tag(:div, nil, id: "toolbar") %>
+
+    <%= content_tag(:div, nil, 
+      id: "flash",
+      data: { notice: flash[:notice], alert: flash[:alert]  }.to_json ) 
+    %>
+
     <%= yield %>
   </body>
 </html>
