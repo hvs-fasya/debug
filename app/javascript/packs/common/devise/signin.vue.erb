@@ -1,0 +1,84 @@
+<template>
+
+  <md-dialog md-open-from="#login-button" md-close-to="#login-button" ref="login-form" v-cloak>
+    <md-dialog-title>Log In</md-dialog-title>
+
+    <md-dialog-content>
+      <form>
+        <md-input-container md-clearable v-bind:class="{'md-input-invalid': hasError}">
+          <label>E-mail</label>
+          <md-input required v-model="user.email" autofocus></md-input>
+        </md-input-container>
+        <md-input-container md-has-password v-bind:class="{'md-input-invalid': hasError}">
+          <label>Password</label>
+          <md-input required v-model="user.password" type="password"></md-input>
+        </md-input-container>
+        <md-checkbox v-model="user.remember_me" class="md-primary">Remember me</md-checkbox>
+      </form>
+    </md-dialog-content>
+
+    <md-dialog-actions>
+      <md-button class="md-primary" @click="closeDialog()">Cancel</md-button>
+      <md-button class="md-primary" @click="loginSend()">Log In</md-button>
+    </md-dialog-actions>
+  </md-dialog>
+</template>
+
+<script>
+
+import { HTTP } from './../http-common.js'
+import { EventBus } from './../../event-bus.js';
+
+export default {
+  data: function () {
+    return {
+      token: document.getElementsByName('csrf-token')[0].getAttribute('content'),
+      user: {
+        email: '',
+        password: '',
+        remember_me: false,
+      },
+      hasError: false,
+    }
+  },
+  methods: {
+    openDialog() {
+      this.$refs['login-form'].open();
+    },
+    closeDialog() {
+      this.$refs['login-form'].close();
+    },
+    addError() {
+      this.hasError = true;
+    },
+    loginSend() {
+      const self = this;
+
+      HTTP.post('/users/sign_in.json', {
+        // authenticity_token : this.token,
+        user: this.user
+      })
+      .then(function(response) {
+        self.authenticity_token = document.getElementsByName('csrf-token')[0].getAttribute('content');
+        EventBus.$emit('loggedIn', response.data);
+        self.$refs['login-form'].close();
+      })
+      .catch(function(response) {
+        try{
+          console.log(response.response.data.error)
+          self.addError();
+          EventBus.$emit('noty-error', response.response.data.error);
+        } catch (e){
+          console.log(e)
+        }
+      })
+    }
+    }
+}
+</script>
+
+<style scoped>
+[v-cloak] {
+  display: none;
+}
+</style>

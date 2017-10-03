@@ -3064,6 +3064,10 @@ normalize-url@^1.4.0:
     query-string "^4.1.0"
     sort-keys "^1.0.0"
 
+noty@^3.1.0:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/noty/-/noty-3.1.2.tgz#301903fd8f9dd292ba61a35e15629302f745e4b3"
+
 npm-run-path@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
@@ -4845,6 +4849,16 @@ vue-template-es2015-compiler@^1.5.3:
 vue@^2.3.3, vue@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.4.2.tgz#a9855261f191c978cc0dc1150531b8d08149b58c"
+
+vuejs-noty@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/vuejs-noty/-/vuejs-noty-0.1.2.tgz#8001ae686e429b15f115cde28092e8c3d26d8a54"
+  dependencies:
+    noty "^3.1.0"
+
+vuex@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-2.4.0.tgz#e1d0430646282b40007fdd06ec6ae88a9f5a1e14"
 
 watchpack@^1.4.0:
   version "1.4.0"

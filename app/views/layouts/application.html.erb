@@ -11,11 +11,17 @@
 
   <body>
 
+    <%= content_tag(:div, nil, 
+      id: "auth",
+      data: {
+        current_user: current_user
+        }.to_json)
+    %>
     <%= content_tag(:div, nil, id: "toolbar") %>
 
     <%= content_tag(:div, nil, 
       id: "flash",
-      data: { notice: flash[:notice], alert: flash[:alert]  }.to_json ) 
+      data: { notice: flash[:notice], alert: flash[:alert] }.to_json ) 
     %>
 
     <%= yield %>

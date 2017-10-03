@@ -8,12 +8,14 @@ import Vue from 'vue'
 
 import Toolbar from './common/toolbar.vue'
 import Flash from './common/flash.vue'
-// import Signin from './common/signin.vue'
 
 import VueMaterial from 'vue-material'
 import VueNoty from 'vuejs-noty'
 import 'vue-material/dist/vue-material.css'
 import 'vuejs-noty/dist/vuejs-noty.css'
+
+import { EventBus } from './event-bus.js';
+import Store from './store.vue'
 
 Vue.use(VueMaterial)
 Vue.use(VueNoty,{
@@ -30,19 +32,44 @@ Vue.material.registerTheme('default', {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  // document.body.appendChild(document.createElement('toolbar'));
+  //state store
+  var store = new Vue(Store)
+  //toolbar
   const toolbar = new Vue(Toolbar).$mount('#toolbar');
+  var auth = JSON.parse(document.getElementById('auth').getAttribute('data'));
+  if(auth.current_user !== null){
+    store.current_user = auth.current_user
+    // store.token = document.getElementsByName('csrf-token')[0].getAttribute('content')
+  }
   //flash messages
-  const props = JSON.parse(document.getElementById('flash').getAttribute('data'));
-  const flash = new Vue(Flash, props).$mount('#flash')
-  if(props.alert){
+  const flashProps = JSON.parse(document.getElementById('flash').getAttribute('data'));
+  const flash = new Vue(Flash, flashProps).$mount('#flash');
+  if(flashProps.alert){
   	flash.$noty.error(props.alert)
   }
-  if(props.notice){
+  if(flashProps.notice){
   	flash.$noty.success(props.notice)
   }
-  //signin dialog
-  // document.body.appendChild(document.createElement('signin'));
-  // const signin = new Vue(Signin).$mount('signin')
+
+  EventBus.$on('noty-error', error => {
+	 flash.$noty.error(error)
+  });
+  EventBus.$on('noty-success', success => {
+	 flash.$noty.success(success)
+  });
+  EventBus.$on('user-changed', user => {
+   toolbar.current_user = user;
+  });
+  EventBus.$on('loggedIn', user => {
+    store.current_user = user;
+    EventBus.$emit('noty-success', "You've successfuly logged In.");
+  });
+  EventBus.$on('loggedOut', user => {
+    store.current_user = user;
+    EventBus.$emit('noty-success', "You've successfuly logged Out.");
+  });
+  // EventBus.$on('new-token', token => {
+  //   store.token = token;
+  //   console.log('Token: ' + store.token)
+  // });
 })

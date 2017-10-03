@@ -1,5 +1,6 @@
 module.exports = {
-  test: /.vue$/,
+  // test: /.vue$/,
+  test: /\.vue(\.erb)?$/,
   loader: 'vue-loader',
   options: {
     extractCSS: true,

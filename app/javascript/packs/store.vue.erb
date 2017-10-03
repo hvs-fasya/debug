@@ -1,0 +1,38 @@
+<template>
+
+</template>
+
+<script>
+
+import { EventBus } from './event-bus.js';
+
+export default {
+  props: [],
+  data: function () {
+    return {
+    	token: '',
+    	current_user: null
+    }
+  },
+  watch: {
+  	current_user: function(user){
+  		EventBus.$emit('user-changed', user);
+  	},
+  },
+  computed: {
+  	signedIn: function(){
+  		if(this.current_user !== null){
+  			return true
+  		}
+  		return false
+  	}
+  },
+  methods: {
+  	
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
