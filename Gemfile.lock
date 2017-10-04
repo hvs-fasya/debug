@@ -240,7 +240,7 @@ DEPENDENCIES
   foreman
   jbuilder (~> 2.5)
   letter_opener
-  listen (>= 3.0.5, < 3.2)
+  listen
   omniauth
   puma (~> 3.7)
   rails (~> 5.1.3)
