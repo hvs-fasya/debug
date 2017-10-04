@@ -32,4 +32,5 @@ module.exports = {
   env,
   loadersDir,
   output
-}
+},
+externals: ['axios']
