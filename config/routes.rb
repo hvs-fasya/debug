@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
-  devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}  
+  devise_for :users, :controllers => 
+  	{sessions: 'sessions', registrations: 'registrations', confirmations: 'confirmations'}  
   root 'pages#index'
   get 'pages/index'
 

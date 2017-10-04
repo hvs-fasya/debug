@@ -1,5 +1,5 @@
 <template>
-  <div id="toolbar" v-cloak>
+  <div id="toolbar">
 <!-- Toolbar -->
     <md-toolbar md-theme="default">
       <md-button class="md-icon-button" @click="toggleLeftSidenav">
@@ -7,9 +7,9 @@
       </md-button>
       <h2 class="md-title" style="flex: 1">{{ logo }}</h2>
       <md-button id="login-button" @click="openSigninDialog()" v-if="!this.signedIn">Login</md-button>
-      <span v-else>{{ this.current_user.email }}</span>
+      <span v-else>You logged in as {{ this.current_user.email }}</span>
       <md-button id="sign-out-button" @click="logout()" v-if="this.signedIn">Log Out</md-button>
-      <md-button id="register-button" v-else>Register</md-button>
+      <md-button id="register-button" v-else @click="openRegisterDialog()">Register</md-button>
     </md-toolbar>
 
     <md-sidenav class="md-left" ref="leftSidenav" md-theme="default">
@@ -32,13 +32,12 @@
         <md-list-item>
           <md-divider></md-divider>
         </md-list-item>
-        <md-list-item href="/users/sign_in" v-if="!this.signedIn">Login</md-list-item>
-        <md-list-item href="/users/sign_up" v-if="!this.signedIn">Register</md-list-item>
       </md-list>
       </md-toolbar>
     </md-sidenav>
 
-    <signin ref='signin'></signin>
+    <signin ref="signin"></signin>
+    <register ref="register"></register>
 
   </div>
 </template>
@@ -47,6 +46,7 @@
 
 import { HTTP } from './http-common.js'
 import Signin from './devise/signin.vue.erb'
+import Register from './devise/register.vue.erb'
 import { EventBus } from './../event-bus.js';
 
 export default {
@@ -73,6 +73,9 @@ export default {
     openSigninDialog() {
       this.$refs.signin.openDialog();
     },
+    openRegisterDialog() {
+      this.$refs.register.openDialog();
+    },
     logout(){
       HTTP.delete('/users/sign_out.json')
       .then(function(response) {
@@ -88,7 +91,7 @@ export default {
     }
   },
   components: {
-    Signin
+    Signin, Register
   }
 }
 

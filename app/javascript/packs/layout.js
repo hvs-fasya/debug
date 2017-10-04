@@ -19,7 +19,7 @@ import Store from './store.vue'
 
 Vue.use(VueMaterial)
 Vue.use(VueNoty,{
-  timeout: 4000,
+  timeout: 3000,
   layout: 'centerRight'
 })
 
@@ -45,10 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const flashProps = JSON.parse(document.getElementById('flash').getAttribute('data'));
   const flash = new Vue(Flash, flashProps).$mount('#flash');
   if(flashProps.alert){
-  	flash.$noty.error(props.alert)
+  	flash.$noty.error(flashProps.alert)
   }
   if(flashProps.notice){
-  	flash.$noty.success(props.notice)
+  	flash.$noty.success(flashProps.notice)
   }
 
   EventBus.$on('noty-error', error => {
@@ -68,8 +68,4 @@ document.addEventListener('DOMContentLoaded', () => {
     store.current_user = user;
     EventBus.$emit('noty-success', "You've successfuly logged Out.");
   });
-  // EventBus.$on('new-token', token => {
-  //   store.token = token;
-  //   console.log('Token: ' + store.token)
-  // });
 })
