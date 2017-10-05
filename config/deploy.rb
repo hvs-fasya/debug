@@ -21,7 +21,7 @@ set :deploy_to, "/home/deployer/apps/debug"
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml", "config/secrets.yml", "config/smpt.yml"
+append :linked_files, "config/database.yml", "config/secrets.yml", "config/smpt.yml", "db/production.sqlite3"
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
