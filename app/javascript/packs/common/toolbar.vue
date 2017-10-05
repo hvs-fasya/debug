@@ -1,19 +1,22 @@
 <template>
-  <md-layout md-column md-gutter>
   <div id="toolbar">
 <!-- Toolbar -->
     <md-toolbar md-theme="default">
       <md-button class="md-icon-button" @click="toggleLeftSidenav">
         <md-icon>menu</md-icon>
       </md-button>
-      <h2 class="md-title" style="flex: 1">{{ logo }}</h2>
-      <md-button id="login-button" @click="openSigninDialog()" v-if="!this.signedIn">Login</md-button>
-      <span v-else>You logged in as {{ this.current_user.email }}</span>
-      <md-button id="sign-out-button" @click="logout()" v-if="this.signedIn">Log Out</md-button>
-      <md-button id="register-button" v-else @click="openRegisterDialog()">Register</md-button>
+      <md-layout md-hide-xsmall style="flex: 1">
+          <h2 class="md-title" >{{ logo }}</h2>
+      </md-layout>
+      <md-layout md-align="end">
+          <md-button id="login-button" @click="openSigninDialog()" v-if="!this.signedIn">Login</md-button>
+          <span v-else>You logged in as {{ this.current_user.email }}</span>
+          <md-button id="sign-out-button" @click="logout()" v-if="this.signedIn">Log Out</md-button>
+          <md-button id="register-button" v-else @click="openRegisterDialog()">Register</md-button>
+      </md-layout>
     </md-toolbar>
 
-    <md-sidenav class="md-left" ref="leftSidenav" md-theme="default">
+    <md-sidenav md-swipeable class="md-left" ref="leftSidenav" md-theme="default">
       <md-toolbar>
         <div class="md-toolbar-container">
           <h3 class="md-title">{{ logo }}</h3>
@@ -41,7 +44,6 @@
     <register ref="register"></register>
 
   </div>
-  </md-layout>
 </template>
 
 <script>
