@@ -1,7 +1,7 @@
 <template>
   <div id="toolbar">
 <!-- Toolbar -->
-    <md-toolbar md-theme="default">
+    <md-toolbar md-theme="default" class="md-large">
       <md-button class="md-icon-button" @click="toggleLeftSidenav">
         <md-icon>menu</md-icon>
       </md-button>
@@ -10,23 +10,25 @@
       </md-layout>
       <md-layout md-align="end">
           <md-button id="login-button" @click="openSigninDialog()" v-if="!this.signedIn">Login</md-button>
-          <span v-else>You logged in as {{ this.current_user.email }}</span>
           <md-button id="sign-out-button" @click="logout()" v-if="this.signedIn">Log Out</md-button>
           <md-button id="register-button" v-else @click="openRegisterDialog()">Register</md-button>
       </md-layout>
     </md-toolbar>
+    <md-layout md-align="end" v-if="this.signedIn">
+      <span id="email-container">You logged in as {{ this.current_user.email }}</span>
+    </md-layout>
 
     <md-sidenav md-swipeable class="md-left" ref="leftSidenav" md-theme="default">
-      <md-toolbar>
-        <div class="md-toolbar-container">
-          <h3 class="md-title">{{ logo }}</h3>
-        </div>
+      <md-toolbar class="md-large">
+          <h3 class="md-title"><md-icon class="md-accent md-size-2x">bug_report</md-icon><span>{{ logo }}</span></h3>
       </md-toolbar>
+      <br>
       <md-toolbar>
       <md-list>
-        <md-list-item href="/">Home</md-list-item>
+        <md-list-item href="/" class="md-inset"><span class="inset2">Home</span></md-list-item>
+        <md-list-item href="/"><md-icon class="md-accent md-size-2x">swap_horiz</md-icon><span>Wörterbuch</span></md-list-item>
         <md-menu>
-          <md-list-item href="#" md-menu-trigger>Lektionen</md-list-item>
+          <md-list-item href="#" md-menu-trigger><md-icon class="md-accent md-size-2x">book</md-icon><span>Lektionen</span></md-list-item>
             <md-menu-content>
               <md-menu-item href="#">My Item 1</md-menu-item>
               <md-menu-item>My Item 2</md-menu-item>
@@ -102,8 +104,12 @@ export default {
 </script>
 
 <style scoped>
-.md-toolbar {
-  height: 100px;
+
+#email-container {
+  margin:20px;
+}
+.inset2 {
+  margin-left: 28px;
 }
 p {
   font-size: 2em;

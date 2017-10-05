@@ -25,7 +25,7 @@ Vue.use(VueNoty,{
 
 Vue.material.registerTheme('default', {
   primary: 'teal',
-  accent: 'red',
+  accent: 'pink',
   warn: 'red',
   background: 'white',
   textColor: 'black'

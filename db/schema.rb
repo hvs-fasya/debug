@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170827171907) do
+ActiveRecord::Schema.define(version: 20171005125718) do
+
+  create_table "german_words", force: :cascade do |t|
+    t.string "text", null: false
+    t.string "plural"
+    t.string "translation", null: false
+    t.string "speech_part", limit: 5, null: false
+    t.string "gender", limit: 1
+    t.integer "lesson"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
