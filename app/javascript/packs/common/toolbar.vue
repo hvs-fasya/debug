@@ -1,4 +1,5 @@
 <template>
+  <md-layout md-column md-gutter>
   <div id="toolbar">
 <!-- Toolbar -->
     <md-toolbar md-theme="default">
@@ -40,6 +41,7 @@
     <register ref="register"></register>
 
   </div>
+  </md-layout>
 </template>
 
 <script>
@@ -98,6 +100,9 @@ export default {
 </script>
 
 <style scoped>
+.md-toolbar {
+  height: 100px;
+}
 p {
   font-size: 2em;
   text-align: center;
