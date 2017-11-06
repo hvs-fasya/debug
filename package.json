@@ -31,6 +31,7 @@
     "vue-loader": "^13.0.4",
     "vue-material": "^0.7.4",
     "vue-template-compiler": "^2.4.2",
+    "vue-touch": "^1.1.0",
     "vuejs-noty": "^0.1.2",
     "vuex": "^2.4.0",
     "webpack": "^3.5.3",
