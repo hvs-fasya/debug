@@ -17,7 +17,7 @@ export default {
   watch: {
   	current_user: function(user){
   		EventBus.$emit('user-changed', user);
-  	},
+  	}
   },
   computed: {
   	signedIn: function(){

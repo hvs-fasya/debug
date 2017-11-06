@@ -26,7 +26,7 @@
       <md-toolbar>
       <md-list>
         <md-list-item href="/" class="md-inset"><span class="inset2">Home</span></md-list-item>
-        <md-list-item href="/"><md-icon class="md-accent md-size-2x">swap_horiz</md-icon><span>Wörterbuch</span></md-list-item>
+        <md-list-item href="/german_words"><md-icon class="md-accent md-size-2x">swap_horiz</md-icon><span>Wörterbuch</span></md-list-item>
         <md-menu>
           <md-list-item href="#" md-menu-trigger><md-icon class="md-accent md-size-2x">book</md-icon><span>Lektionen</span></md-list-item>
             <md-menu-content>

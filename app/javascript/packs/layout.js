@@ -8,9 +8,11 @@ import Vue from 'vue'
 
 import Toolbar from './common/toolbar.vue'
 import Flash from './common/flash.vue'
+import MainContent from './main-content.vue'
 
 import VueMaterial from 'vue-material'
 import VueNoty from 'vuejs-noty'
+import VueTouch from 'vue-touch'
 import 'vue-material/dist/vue-material.css'
 import 'vuejs-noty/dist/vuejs-noty.css'
 
@@ -22,6 +24,7 @@ Vue.use(VueNoty,{
   timeout: 3000,
   layout: 'centerRight'
 })
+Vue.use(VueTouch, {name: 'v-touch'})
 
 Vue.material.registerTheme('default', {
   primary: 'teal',
@@ -39,7 +42,17 @@ document.addEventListener('DOMContentLoaded', () => {
   var auth = JSON.parse(document.getElementById('auth').getAttribute('data'));
   if(auth.current_user !== null){
     store.current_user = auth.current_user
-    // store.token = document.getElementsByName('csrf-token')[0].getAttribute('content')
+  }
+  var pageProps = JSON.parse(document.getElementById('page-data').getAttribute('data')).data;
+  console.log(pageProps);
+  if(pageProps){
+    var main_content = new Vue(MainContent).$mount('#page-content');
+  }
+  if(pageProps.app_type){
+    main_content.app_type = pageProps.app_type
+  }
+  if(pageProps.page_data){
+    main_content.page_data = pageProps.page_data
   }
   //flash messages
   const flashProps = JSON.parse(document.getElementById('flash').getAttribute('data'));
@@ -50,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if(flashProps.notice){
   	flash.$noty.success(flashProps.notice)
   }
-
+  //events
   EventBus.$on('noty-error', error => {
 	 flash.$noty.error(error)
   });

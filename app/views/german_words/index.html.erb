@@ -1,0 +1,12 @@
+<%= stylesheet_pack_tag 'german_words/words' %>
+
+    <%= content_tag(:div, nil,
+      id: "page-data",
+      data: {
+      	data: @data
+        }.to_json) 
+    %>
+
+    <%= content_tag(:div, nil,
+      id: "page-content")
+    %>
